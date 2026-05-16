@@ -388,7 +388,7 @@ export default function LoveScratchCards() {
           </button>
           <div style={styles.divider}>
             <span style={styles.dividerLine} />
-            <span style={styles.dividerHeart}>♥</span>
+            <span style={styles.dividerHeart}>SIREMI ♥</span>
             <span style={styles.dividerLine} />
           </div>
           <p style={styles.footerSig}>With all my heart, always &amp; forever.</p>
