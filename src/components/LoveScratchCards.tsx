@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 
 // ── Types ──────────────────────────────────────────────────────────────────────
 
@@ -159,10 +159,10 @@ const ScratchCard: React.FC<ScratchCardProps> = ({ message, index, onReveal }) =
     ctx.beginPath();
     ctx.arc(x, y, SCRATCH_RADIUS, 0, Math.PI * 2);
     ctx.fill();
-    checkReveal(canvas, x, y);
+    checkReveal(canvas);
   };
 
-  const checkReveal = (canvas: HTMLCanvasElement, x: number, y: number) => {
+  const checkReveal = (canvas: HTMLCanvasElement) => {
     if (isRevealed.current) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -284,7 +284,7 @@ const ConfettiLayer: React.FC<{ pieces: ConfettiPiece[] }> = ({ pieces }) => (
 // ── Main App ───────────────────────────────────────────────────────────────────
 
 export default function LoveScratchCards() {
-  const [cardStates, setCardStates] = useState<CardState[]>(
+  const [, setCardStates] = useState<CardState[]>(
     MESSAGES.map(() => ({ revealed: false, bursting: false }))
   );
   const [revealedCount, setRevealedCount] = useState(0);
@@ -302,7 +302,7 @@ export default function LoveScratchCards() {
     setRevealedCount((c) => c + 1);
 
     // Spawn confetti
-    const pieces: ConfettiPiece[] = Array.from({ length: 20 }, (_, i) => ({
+    const pieces: ConfettiPiece[] = Array.from({ length: 20 }, () => ({
       id: confettiId.current++,
       x: x + (Math.random() - 0.5) * 80,
       y: y + (Math.random() - 0.5) * 40,
